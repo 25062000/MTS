@@ -1,23 +1,33 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators,AbstractControl, ValidationErrors, ValidatorFn, } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ClientService } from '../service/client.service';
+import { HttpClientModule } from '@angular/common/http';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-register',
   standalone: true,
   imports: [ ReactiveFormsModule,
      CommonModule,
+     NavbarComponent
+    ],
+    providers: [
+      HttpClientModule
     ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
 
-  constructor( private formBuilder: FormBuilder){}
+  constructor( private formBuilder: FormBuilder, private _clientService: ClientService){}
 
 
   registerForm!: FormGroup;
   submitted = false;
+  name: string="";
+  email: string="";
+  password: string="";
 
   ngOnInit(){
   
@@ -35,19 +45,6 @@ export class RegisterComponent {
   );
   }
 
-  // confirmPasswordValidator(): ValidatorFn {
-  //   return (control: AbstractControl): ValidationErrors | null => {
-  //     const password = this.registerForm.get('password')?.value;
-  //     const confirmPassword = control.value;
-      
-  //     // Check if passwords match
-  //     const passwordsMatch = password === confirmPassword;
-
-  //     // If passwords don't match, return the error message
-  //     return passwordsMatch ? null : { PasswordNoMatch: "error" };
-  //   };
-  // }
-
   get f() {
     return this.registerForm.controls;
   }
@@ -60,13 +57,22 @@ export class RegisterComponent {
       return 
     }
 
+    let clientDetails ={
+      "name" : this.name,
+      "email" : this.email,
+      "password" : this.password
+    }
 
-    console.log("On submit function is executed");
+    this._clientService.clientRegister(clientDetails).subscribe((resultData: any)=>{
+      console.log(resultData);
+      alert("Registered Successfully");
+    })
+
+
+    
   }
 
-  // ConfirmedValidator(){
 
-  // }
 
  
 
