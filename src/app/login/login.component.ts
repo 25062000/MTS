@@ -74,8 +74,9 @@ export class LoginComponent {
       })
     }else{
       this._adminService.adminLogin(clientDetails).subscribe((resultData: any)=>{
-        console.log(resultData)
+        console.log(resultData);
         if(resultData.status){
+          localStorage.setItem("accessToken", resultData.data.accesToken);
           alert("Logged in successully");
           this.router.navigateByUrl('/admin/dashboard');
         }else{

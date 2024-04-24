@@ -16,14 +16,16 @@ export class UsersListComponent{
   constructor( private _adminService: AdminService){}
   userDetails: any;
 
-  ngOnIt(){
-
-    this._adminService.getAllUserDetails().subscribe(res=>{
-        console.log(res);
-        this.userDetails = res;
-        console.log(this.userDetails);
-        console.log("Users details fetched successfully");
-  })
+  ngOnInit(){
+    this.getAllUsers();
   }
+  
+  getAllUsers(){
+    this._adminService.getAllUserDetails().subscribe(res=>{
+      this.userDetails = res.data;
+      console.log("Users details fetched successfully");
+    })
+  }
+  
 
 }
