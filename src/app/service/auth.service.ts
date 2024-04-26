@@ -12,5 +12,12 @@ export class AuthService {
     var token = localStorage.getItem("accessToken");
     return token;
   }
+ 
+  isLoggedIn(){
+    var token = this.getAccessToken();
+    return token!= null? true: false;
+  }
+
+  
 
 }

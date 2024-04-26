@@ -64,9 +64,8 @@ export class LoginComponent {
 
     if (this.route == "user"){
       this._clientService.clientLogin(clientDetails).subscribe((resultData: any)=>{
-        console.log(resultData);
         if(resultData.status){
-          alert("Logged in successully");
+          localStorage.setItem("accessToken", resultData.data.token);
           this.router.navigateByUrl('/client/dashboard');
         }else{
           alert(resultData.message)
@@ -74,10 +73,8 @@ export class LoginComponent {
       })
     }else{
       this._adminService.adminLogin(clientDetails).subscribe((resultData: any)=>{
-        console.log(resultData);
         if(resultData.status){
           localStorage.setItem("accessToken", resultData.data.accesToken);
-          alert("Logged in successully");
           this.router.navigateByUrl('/admin/dashboard');
         }else{
           alert(resultData.message)
