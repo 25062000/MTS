@@ -8,9 +8,32 @@ export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: R
   const router = inject(Router);
 
   if(inject(AuthService).isLoggedIn()){
-    return true;
+    if(!inject(AuthService).isAdmin()){
+      return true;
+    }else{
+      router.navigateByUrl('/login');
+      return false;
+    }
   }else{
     router.navigateByUrl('/login');
+    return false;
+  }
+
+};
+
+export const adminGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+  console.log("adminguard works");
+  const router = inject(Router);
+
+  if(inject(AuthService).isLoggedIn()){
+    if(inject(AuthService).isAdmin()){
+      return true;
+    }else{
+      router.navigateByUrl('admin/login');
+      return false;
+    }
+  }else{
+    router.navigateByUrl('admin/login');
     return false;
   }
 

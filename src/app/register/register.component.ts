@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ClientService } from '../service/client.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from '../navbar/navbar.component';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -20,7 +21,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
 })
 export class RegisterComponent {
 
-  constructor( private formBuilder: FormBuilder, private _clientService: ClientService){}
+  constructor( private formBuilder: FormBuilder, private _clientService: ClientService, private router: Router){}
 
 
   registerForm!: FormGroup;
@@ -64,16 +65,8 @@ export class RegisterComponent {
     }
 
     this._clientService.clientRegister(clientDetails).subscribe((resultData: any)=>{
-      console.log(resultData);
-      alert("Registered Successfully");
+      this.router.navigateByUrl('/login');
     })
 
-
-    
   }
-
-
-
- 
-
 }
