@@ -1,0 +1,36 @@
+<app-admin-navbar></app-admin-navbar>
+<!--Main layout-->
+<main style="margin-top: 58px;">
+    <div class="container pt-4">
+        <div class="row">
+            <div class="col-12" style="background-color: rgba(255, 255, 255, .9);">
+               <h2 class="text-center">Chart Management</h2>
+            </div>
+        </div>
+    </div>
+    <div class="center">
+        <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)" 
+        (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+            <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+              Optional custom content that replaces the the entire default content.
+              <button type="button" (click)="openFileSelector()">Browse Files</button>
+            </ng-template>
+        </ngx-file-drop>
+        <div class="upload-table">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody class="upload-name-style">
+                    <tr *ngFor="let item of files; let i=index">
+                        <td><strong>{{ item.relativePath }}</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+   
+</main>
+  <!--Main layout-->

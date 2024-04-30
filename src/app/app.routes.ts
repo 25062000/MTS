@@ -6,6 +6,7 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
 import { UsersListComponent } from './admin/users-list/users-list.component';
 import { authGuard, adminGuard } from './service/auth.guard';
 import { ViewChartComponent } from './client/view-chart/view-chart.component';
+import { ChartManagementComponent } from './admin/chart-management/chart-management.component';
 
 export const routes: Routes = [
     {path: 'login', component: LoginComponent},
@@ -16,4 +17,5 @@ export const routes: Routes = [
     {path: 'admin/login',component: LoginComponent},
     {path: 'admin/dashboard', component: AdminDashboardComponent, canActivate:[adminGuard]},
     {path: 'admin/users', component: UsersListComponent, canActivate:[adminGuard]},
+    {path: 'admin/charts', component: ChartManagementComponent, canActivate:[adminGuard]},
 ];
