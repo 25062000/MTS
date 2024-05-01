@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,5 +17,9 @@ export class ClientService {
 
   clientLogin(clientDetails: any){
     return this._http.post(this.baseUrl+'login', clientDetails);
+  }
+
+  getEncFiles():Observable<any>{
+    return this._http.get(this.baseUrl+'getEncFiles');
   }
 }

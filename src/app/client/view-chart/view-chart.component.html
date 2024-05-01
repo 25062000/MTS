@@ -1,1 +1,30 @@
-<div class="map" id="map" class="match-parent"></div>
+<div class="map-view">
+    <div class="map" id="map" class="match-parent"></div>
+
+    <div class="mapTypeId">
+        <button class="btn text-center" (click)="onChartClick()"> Charts</button>
+    </div>
+
+    <div class="chart-content" *ngIf = "isChartBtnClicked">
+        <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+            <mat-tab label="New Files">
+                <section class="example-section">
+                    <div *ngFor = "let item of newFiles; let i = index">
+                        <mat-checkbox class="example-margin">{{item}}</mat-checkbox>
+                    </div>
+                    <!-- <mat-checkbox class="example-margin">Indeterminate</mat-checkbox> -->
+                  </section>
+              
+            </mat-tab>
+            <mat-tab label="Permitted Files">
+                <section class="example-section">
+                    <mat-checkbox class="example-margin">Checked</mat-checkbox>
+                    <mat-checkbox class="example-margin">Indeterminate</mat-checkbox>
+                  </section>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+      
+</div>
+
+

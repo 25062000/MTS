@@ -11,9 +11,9 @@ import { ChartManagementComponent } from './admin/chart-management/chart-managem
 export const routes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent},
-    {path: 'client/dashboard', component: ClientDashboardComponent, canActivate:[authGuard]},
     {path: 'client/viewChart', component: ViewChartComponent, canActivate:[authGuard]},
-
+    {path: 'client/dashboard', component: ClientDashboardComponent, canActivate:[authGuard]},
+    
     {path: 'admin/login',component: LoginComponent},
     {path: 'admin/dashboard', component: AdminDashboardComponent, canActivate:[adminGuard]},
     {path: 'admin/users', component: UsersListComponent, canActivate:[adminGuard]},
