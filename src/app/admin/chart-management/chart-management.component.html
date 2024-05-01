@@ -10,10 +10,11 @@
     </div>
     <div class="center">
         <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)" 
-        (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+            (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
             <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
-              Optional custom content that replaces the the entire default content.
+                Drop files here or 
               <button type="button" (click)="openFileSelector()">Browse Files</button>
+              <button type="button" class="btn btn-primary" (click)="uploadFiles()">Upload</button>
             </ng-template>
         </ngx-file-drop>
         <div class="upload-table">

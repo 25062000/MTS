@@ -20,4 +20,9 @@ export class AdminService {
     return this._http.get(this.baseUrl+ 'allUser');
   }
 
+  uploadFiles(files: any){
+    console.log(files);
+    return this._http.post(this.baseUrl +'uploadFiles', files);
+  }
+
 }
