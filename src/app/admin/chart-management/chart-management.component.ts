@@ -41,7 +41,7 @@ export class ChartManagementComponent {
 
   public uploadFiles(){
     console.log(this.formData);
-    this._adminService.uploadFiles(this.formData).subscribe(res =>{
+    this._adminService.uploadFiles(this.formData).subscribe((res:any) =>{
       if(res.status){
         console.log("Files uploaded successfully");
       }else{
