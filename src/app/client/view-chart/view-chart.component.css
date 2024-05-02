@@ -14,25 +14,26 @@
 
 .mapTypeId {
   position: absolute;
-  top: 20px;
+  top: 0px;
   left: 20px;
   border-radius: 2px;
   background-color: white;
   box-shadow: 1px 1px 3px 0 rgba(0,0,0,0.1);
-    width: 175px;
     overflow: hidden;
     background: #fff url("http://www.scottgood.com/jsg/blog.nsf/images/arrowdown.gif") no-repeat 90% 50%;
     color: black;
-    padding: 8px 0;
     display: flex;
     align-items: center;
     justify-content: center;
+}
 
+.mapTypeId .btn{
+  width: 175px;
 }
 
 .chart-content{
   position: absolute;
-  top:74px;
+  top: 38px;
   left: 20px;
   background-color: #fff;
   padding: 10px 0;
@@ -46,4 +47,27 @@
 .example-section{
   display: flex;
   flex-direction:column;
+}
+
+.extendHeight{
+  height: calc(90vh - 30px) !important;
+  display:flex;
+  flex-direction:column;
+}
+
+.requestBtnDiv{
+  margin-left: 0;
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.checkboxDiv{
+  padding: 10px 0 10px 10px;
+  gap:20px;
+}
+
+input[type="checkbox"]{
+  width: 20px;
+  height: 20px;
 }

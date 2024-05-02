@@ -22,4 +22,8 @@ export class ClientService {
   getEncFiles():Observable<any>{
     return this._http.get(this.baseUrl+'getEncFiles');
   }
+
+  requestNewFiles(requestedFiles: any){
+    return this._http.post(this.baseUrl+'requestFiles', requestedFiles);
+  }
 }
