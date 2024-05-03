@@ -12,18 +12,29 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Email</th>
+                    <th scope="col">clientID</th>
                     <th scope="col">Requests</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <!-- <tr *ngFor="let user of userDetails; let i = index"> 
+                  <tr *ngFor="let user of requestFileDetails; let i = index"> 
                     <th scope="row">{{i+1}}</th>
-                    <td>{{user.name}}</td>
-                    <td>{{user.email}}</td>
-                     <td>{{user.password}}</td>
-                  </tr> -->
+                    <th>{{user.clientID}}</th>
+                    <th>
+                      <section class="example-section">
+                        <div *ngFor = "let item of user.requestedFiles; let i = index">
+                            <div class="d-flex checkboxDiv">
+                                <input type="checkbox" class="example-margin"  [(ngModel)]="item.isSelected">
+                                <label>{{ item.name }}</label>
+                            </div> 
+                        </div>
+                    </section>  
+                    <div class="requestBtnDiv">
+                        <button class="btn btn-primary btn-sm" (click)="onAccept(i);">Accept</button>
+                        <button class="btn btn-danger btn-sm" (click)="onReject(i)">Reject</button>
+                    </div>
+                    </th>
+                  </tr>
                  
                 </tbody>
               </table>

@@ -81,6 +81,13 @@ export class ViewChartComponent {
 
   getRequestedNewFiles(){
     var requestedFiles = this.newFiles.filter(item =>item.isSelected == true).map(item => item.name);
+    requestedFiles = requestedFiles.map((file, index)=>{
+      return {
+          id: index + 1,
+          name: file,
+          isSelected: false
+      };
+    })
     this.clientID = this.getClientId();
     var requestedArray = {
       clientID : this.clientID,

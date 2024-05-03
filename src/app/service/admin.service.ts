@@ -21,8 +21,19 @@ export class AdminService {
   }
 
   uploadFiles(files: any){
-    console.log(files);
     return this._http.post(this.baseUrl +'uploadFiles', files);
+  }
+
+  getAllRequestedFiles():Observable<any>{
+    return this._http.get(this.baseUrl+'getAllRequestedFiles');
+  }
+
+  acceptFiles(requestedArray: any){
+    return this._http.post(this.baseUrl +'acceptRequestFiles', requestedArray);
+  }
+
+  rejectFiles(requestedArray: any){
+    return this._http.post(this.baseUrl +'rejectRequestFiles', requestedArray);
   }
 
 }

@@ -3,3 +3,18 @@
       padding-left: 240px;
     }
 }
+
+input[type="checkbox"]{
+  width: 20px;
+  height: 20px;
+}
+
+.checkboxDiv{
+  padding: 10px 0 10px 0px;
+  gap:20px;
+}
+
+.requestBtnDiv{
+  display: flex;
+  gap:20px;
+}
