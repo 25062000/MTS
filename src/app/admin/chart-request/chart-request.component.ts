@@ -35,19 +35,19 @@ export class ChartRequestComponent {
       var requestedFile = this.requestFileDetails[i].requestedFiles;
       var clientID = this.requestFileDetails[i].clientID;
       requestedFile = requestedFile.filter((item: any)=>item.isSelected == true).map((item: any) => item.name);
-      console.log(requestedFile);
+      console.log("Request on accpt",requestedFile);
       var requestedArray = {
         clientID : clientID,
         requestedFiles : requestedFile
       };
-      console.log(requestedArray);
-      // this._adminService.acceptFiles(requestedArray).subscribe((res: any)=>{
-      //   if(res.status){
-      //     alert("Files are accepeted");
-      //   }else{
-      //     alert(res.message);
-      //   }
-      // })
+      console.log("RequestedArray",requestedArray);
+      this._adminService.acceptFiles(requestedArray).subscribe((res: any)=>{
+        if(res.status){
+          alert("Files are accepeted");
+        }else{
+          alert(res.message);
+        }
+      })
       }catch(error){
         console.log("Error:",error);
       }
