@@ -19,11 +19,15 @@ export class ClientService {
     return this._http.post(this.baseUrl+'login', clientDetails);
   }
 
-  getEncFiles():Observable<any>{
-    return this._http.get(this.baseUrl+'getEncFiles');
+  getEncFiles(clientID: any):Observable<any>{
+    return this._http.post(this.baseUrl+'getEncFiles', clientID);
   }
 
   requestNewFiles(requestedFiles: any){
     return this._http.post(this.baseUrl+'requestFiles', requestedFiles);
+  }
+
+  getPermittedFiles(clientID: any){
+    return this._http.post(this.baseUrl+'getPermittedFiles', clientID);
   }
 }

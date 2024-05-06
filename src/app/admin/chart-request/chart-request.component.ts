@@ -24,6 +24,8 @@ export class ChartRequestComponent {
       this._adminService.getAllRequestedFiles().subscribe((res)=>{
         if(res.status){
           this.requestFileDetails = res.data;
+          console.log(this.requestFileDetails);
+          this.requestFileDetails =  this.requestFileDetails.filter((item: any)=> item.requestedFiles.length >0);
         }else{
           console.log("Can't get files");
         }
@@ -44,6 +46,7 @@ export class ChartRequestComponent {
       this._adminService.acceptFiles(requestedArray).subscribe((res: any)=>{
         if(res.status){
           alert("Files are accepeted");
+          location.reload();
         }else{
           alert(res.message);
         }
@@ -64,13 +67,14 @@ export class ChartRequestComponent {
         requestedFiles : requestedFile
       };
       console.log(requestedArray);
-      // this._adminService.rejectFiles(requestedArray).subscribe((res: any)=>{
-      //   if(res.status){
-      //     alert("Files are rejected");
-      //   }else{
-      //     alert(res.message);
-      //   }
-      // })
+      this._adminService.rejectFiles(requestedArray).subscribe((res: any)=>{
+        if(res.status){
+          alert("Files are rejected");
+          location.reload();
+        }else{
+          alert(res.message);
+        }
+      })
       }catch(error){
         console.log("Error:",error);
       }

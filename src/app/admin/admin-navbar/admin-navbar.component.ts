@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { accessToken } from 'mapbox-gl';
 
 @Component({
   selector: 'app-admin-navbar',
@@ -9,4 +11,10 @@ import { Component } from '@angular/core';
 })
 export class AdminNavbarComponent {
 
+  constructor(private router:Router){}
+
+  onLogOut(){
+    localStorage.setItem("accessToken","");
+    this.router.navigateByUrl('/admin/login');
+  }
 }

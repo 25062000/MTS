@@ -27,12 +27,14 @@ export class ViewChartComponent {
   isChartBtnClicked: boolean = false;
   newFiles: any[] =[];
   showRequest: boolean = false;
+  showRequest2: boolean = false;
   clientID: any; 
+  permittedFiles: any[] = [];
 
-  ngOnInit() {
-    
+  ngOnInit() { 
       this.loadNewFiles();
-     this.map = new mapboxgl.Map({
+      this.loadPermittedFiles();
+      this.map = new mapboxgl.Map({
         container: 'map',
         accessToken: this.accessToken,
         style: this.style,
@@ -46,9 +48,13 @@ export class ViewChartComponent {
     this.isChartBtnClicked = !this.isChartBtnClicked;
   }
 
+  // Loading new files
   loadNewFiles(){
-    console.log("load new files executed");
-    this._clientService.getEncFiles().subscribe((res: any)=>{
+    var clientID =this.getClientId();
+    clientID ={
+      clientID : clientID
+    }
+    this._clientService.getEncFiles(clientID).subscribe((res: any)=>{
       if(res.status){
         this.newFiles = res.data;
         this.newFiles = this.newFiles.map((file, index)=>{
@@ -58,17 +64,37 @@ export class ViewChartComponent {
               isSelected: false
           };
         })
-        console.log(this.newFiles);
       }else{
         console.log(res.message);
       }
     })
   }
 
+  // Loading permitted files
+  loadPermittedFiles(){
+    var clientID =this.getClientId();
+    clientID ={
+      clientID : clientID
+    }
+    this._clientService.getPermittedFiles(clientID).subscribe((res: any)=>{
+      if(res.status){
+        this.permittedFiles = res.data;
+        this.permittedFiles = this.permittedFiles.map((file, index)=>{
+          return {
+              id: index + 1,
+              name: file,
+              isSelected: false
+          };
+        })
+      }else{
+        console.log(res.message);
+      }
+    })
+  }
+
+  // On Change in new files section
   onChange(whichFile:string){
-    console.log("Event",this.newFiles)
     var anyChecked = this.newFiles.some((file: any) => file.isSelected);
-    console.log(anyChecked);
     const fileDiv = document.querySelector('.'+ whichFile);
     if(anyChecked){
       this.showRequest = true;
@@ -79,6 +105,20 @@ export class ViewChartComponent {
     }
   }
 
+  // On change in permitted files
+  onPermitChange(whichFile: string){
+    var anyChecked = this.permittedFiles.some((file: any) => file.isSelected);
+    const fileDiv = document.querySelector('.'+ whichFile);
+    if(anyChecked){
+      this.showRequest2 = true;
+      fileDiv?.classList.add('extendHeight'); 
+    }else{
+      this.showRequest2 = false;
+      fileDiv?.classList.remove('extendHeight'); 
+    }
+  }
+
+  // Request button in new files
   getRequestedNewFiles(){
     var requestedFiles = this.newFiles.filter(item =>item.isSelected == true).map(item => item.name);
     requestedFiles = requestedFiles.map((file, index)=>{
@@ -93,8 +133,6 @@ export class ViewChartComponent {
       clientID : this.clientID,
       requestedFiles : requestedFiles
     };
-    const requestedFileJson = JSON.stringify(requestedArray);
-    console.log(requestedFileJson);
 
     this._clientService.requestNewFiles(requestedArray).subscribe((resultData: any) =>{
       if(resultData.status){
@@ -105,6 +143,7 @@ export class ViewChartComponent {
     });
   }
 
+  // Get client ID
   getClientId(){
     var token = this._authService.getAccessToken();
     if(token){ 

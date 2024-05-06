@@ -12,14 +12,16 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">clientID</th>
+                    <th scope="col">Client Name</th>
+                    <th scope="col">Client Email</th>
                     <th scope="col">Requests</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let user of requestFileDetails; let i = index"> 
                     <th scope="row">{{i+1}}</th>
-                    <th>{{user.clientID}}</th>
+                    <th>{{user.clientID.name}}</th>
+                    <th>{{user.clientID.email}}</th>
                     <th>
                       <section class="example-section">
                         <div *ngFor = "let item of user.requestedFiles; let i = index">
