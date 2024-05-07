@@ -2,3 +2,43 @@
     color: red;
     margin-top: 5px;
 }
+
+.register{
+    background: url('../../assets/images/register_banner.jpg');
+    /* background: url('../../assets/images/login_banner.jpg'); */
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.innerContent{
+ width: 500px;
+ background-color: rgba(255, 255, 255, 0.3);
+ position: absolute;
+ transform: translate(-50%, -50%);
+ top: 50%;
+ left: 50%;
+ border-radius: 10px;
+ backdrop-filter: blur(15px);
+ border: 2px solid rgba(255, 255, 255, 0.1);
+ box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+ padding: 50px 35px;
+}
+
+.registerbtn{
+ background-color: #3b8593;
+ color:#fff;
+ border-radius:40px;
+ width:120px;
+ transition: 0.3s ease;
+}
+
+.registerbtn:hover{
+ color: #3b8593;
+ background-color: #fff;
+ transition: 0.3s ease;
+}
+
+.loginBtn{
+ text-decoration: none;
+ color:#000;
+}

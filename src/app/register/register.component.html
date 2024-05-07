@@ -1,12 +1,12 @@
 <app-navbar></app-navbar>
-<section class="vh-100" style="background-color: #eee;">
-    <div class="container h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-lg-12 col-xl-11">
-          <div class="card text-black" style="border-radius: 25px;">
-            <div class="card-body p-md-5">
-              <div class="row justify-content-center">
-                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+<section class="vh-100 register">
+    <div class=" h-100">
+      <div class=" d-flex justify-content-center align-items-center h-100">
+        <div class="">
+          <div class=" innerContent text-black" style="border-radius: 25px;">
+            <div class="">
+              <div class=" justify-content-center">
+                <div class="">
   
                   <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Register</p>
   
@@ -56,27 +56,10 @@
                       </div>
                     </div>
   
-                    <!-- <div class="d-flex flex-row align-items-center mb-4">
-                      <i class="fas fa-key fa-lg me-3 fa-fw"></i>
-                      <div data-mdb-input-init class="form-outline flex-fill mb-0">
-                        <input formControlName="confirmPassword"  [ngClass]="{'is-invalid': submitted && f['confirmPassword'].errors}" type="password" id="form3Example4cd" class="form-control" placeholder="Repeat your password" />
-                       
-                       
-                        <div *ngIf="submitted && f['confirmPassword'].errors && (f['confirmPassword'].dirty || f['confirmPassword'].touched)" class="invalid-feedback">
-                            <div *ngIf="f['confirmPassword'].errors['required']" class="text-danger">Confirm password must be required</div>
-                            <div *ngIf="f['confirmPassword'].errors['pattern']">Password must contain at least one number, one uppercase and a
-                                lowercase letter and at least 8 characters<br />Password cannot
-                                contain whitespace</div>
-                           
-                            <div *ngIf="f['confirmPassword'].errors['PasswordNoMatch']" class="text-danger">{{ f['confirmPassword'].errors['PasswordNoMatch'] }}</div>
-                        </div>
-                      </div>
-                    </div> -->
-  
                     <div class="form-check d-flex justify-content-center mb-5">
                       <input formControlName="terms"  [ngClass]="{'is-invalid': submitted && f['terms'].errors}" class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
-                      <label class="form-check-label" for="form2Example3">
-                        I agree all statements in <a href="#!">Terms of service</a>
+                      <label class="form-check-label text-white" for="form2Example3">
+                        I agree all statements in <a href="#!" class="text-danger">Terms of service</a>
                       </label>
 
                       <!-- Validations -->
@@ -86,18 +69,17 @@
                     </div>
   
                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                      <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg">Register</button>
+                      <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn registerbtn btn-lg">Register</button>
                     </div>
   
                   </form>
   
                 </div>
-                <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
-  
-                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
-                    class="img-fluid" alt="Sample image">
-  
+
+                <div class="text-center">
+                  <p class="text-white">Already have an account? <a href="/login" class="loginBtn">Sign In</a></p>
                 </div>
+
               </div>
             </div>
           </div>

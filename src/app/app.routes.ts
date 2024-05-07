@@ -8,8 +8,14 @@ import { authGuard, adminGuard } from './service/auth.guard';
 import { ViewChartComponent } from './client/view-chart/view-chart.component';
 import { ChartManagementComponent } from './admin/chart-management/chart-management.component';
 import { ChartRequestComponent } from './admin/chart-request/chart-request.component';
+import { HomeComponent } from './home/home.component';
 
 export const routes: Routes = [
+
+
+    
+    { path: '', redirectTo: '/homepage', pathMatch: 'full' },
+    { path: 'homepage', component: HomeComponent },
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent},
     {path: 'client/viewChart', component: ViewChartComponent, canActivate:[authGuard]},

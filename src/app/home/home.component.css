@@ -1,0 +1,45 @@
+body {
+    overflow: hidden;
+  }
+  
+  header #inner_header_post_thumb {
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    background-image: url(https://images.unsplash.com/photo-1595850295565-ec6fb9f2a9c1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+    height: 100vh;
+  }
+  header #inner_header_post_thumb .dark_overlay {
+    position: relative;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.65);
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  header #inner_header_post_thumb .dark_overlay .container .header-txt {
+    color: #ffffff;
+  }
+  header #inner_header_post_thumb .dark_overlay .container .header-txt h1 {
+    font-size: 40px;
+    color: #ffffff;
+    text-transform: uppercase;
+    line-height: 65px;
+  }
+  header #inner_header_post_thumb .dark_overlay .container .header-txt h3 {
+    font-size: 24px;
+    color: #ffffff;
+    font-weight: 300;
+  }
+  header #inner_header_post_thumb .dark_overlay .container .header-txt p {
+    font-size: 1rem;
+    font-weight: 300;
+  }
+  header #inner_header_post_thumb .dark_overlay .container .header-txt p strong {
+    font-weight: 700;
+  }
