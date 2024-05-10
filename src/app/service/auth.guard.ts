@@ -22,7 +22,6 @@ export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: R
 };
 
 export const adminGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
-  console.log("adminguard works");
   const router = inject(Router);
 
   if(inject(AuthService).isLoggedIn()){

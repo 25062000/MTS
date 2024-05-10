@@ -13,12 +13,11 @@ import { HomeComponent } from './home/home.component';
 export const routes: Routes = [
 
 
-    
-    { path: '', redirectTo: '/homepage', pathMatch: 'full' },
-    { path: 'homepage', component: HomeComponent },
+    {path: '', redirectTo: '/homepage', pathMatch: 'full' },
+    {path: 'homepage', component: HomeComponent },
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent},
-    {path: 'client/viewChart', component: ViewChartComponent, canActivate:[authGuard]},
+    {path: 'client/viewChart', component: ViewChartComponent, canActivate:[authGuard] },
     {path: 'client/dashboard', component: ClientDashboardComponent, canActivate:[authGuard]},
     
     {path: 'admin/login',component: LoginComponent},

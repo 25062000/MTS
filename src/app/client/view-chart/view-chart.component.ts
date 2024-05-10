@@ -6,11 +6,12 @@ import * as mapboxgl from 'mapbox-gl';
 import { ClientService } from '../../service/client.service';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../service/auth.service';
+import { ClientNavbarComponent } from '../client-navbar/client-navbar.component';
 
 @Component({
   selector: 'app-view-chart',
   standalone: true,
-  imports: [ MatTabsModule, CommonModule, MatCheckboxModule, FormsModule],
+  imports: [ MatTabsModule, CommonModule, MatCheckboxModule, FormsModule, ClientNavbarComponent],
   templateUrl: './view-chart.component.html',
   styleUrl: './view-chart.component.css'
 })

@@ -1,0 +1,28 @@
+<section>
+    <div class="header">
+            <div class="logo" [routerLink]="['/']" >ENC Server</div>
+            <div class="user">
+              <div class="user-name">{{clientDetail.name}}</div>
+              <div class="user-image"><i class="fa-solid fa-user"></i></div>
+            </div>
+    </div>
+    <div class="main-container">
+        <div class="side-nav">
+            <div class="nav-items">
+                <div class="nav-item"  [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}">
+                  <i class="fa-solid fa-gauge"></i>
+                  <span [routerLink]="['/client/dashboard']">Dashboard</span>
+                </div>
+                <div class="nav-item" [routerLinkActive]="'active'"  [routerLinkActiveOptions]="{exact:true}">
+                    <i class="fa-solid fa-map"></i>
+                    <span [routerLink]="['/client/viewChart']">View Map</span>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <button (click)="onSignOut()" class="btn signout">Sign Out</button>
+                </div>
+              </div>
+        </div>
+    </div>
+   
+</section>

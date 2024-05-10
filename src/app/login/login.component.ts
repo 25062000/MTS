@@ -54,7 +54,7 @@ export class LoginComponent {
     if (this.router.url.includes('/admin/login')) 
     {  
            this.route = "admin"; 
-           alert(this.route);
+          //  alert(this.route);
     }
 
     let clientDetails ={

@@ -19,6 +19,10 @@ export class ClientService {
     return this._http.post(this.baseUrl+'login', clientDetails);
   }
 
+  getClientDetails(clientID: any):Observable<any>{
+    return this._http.post(this.baseUrl+'singleUserDetails', clientID);
+  }
+
   getEncFiles(clientID: any):Observable<any>{
     return this._http.post(this.baseUrl+'getEncFiles', clientID);
   }

@@ -1,47 +1,48 @@
-<div class="map-view">
-    <div class="map" id="map" class="match-parent"></div>
-
-    <div class="mapTypeId">
-        <button class="btn text-center" (click)="onChartClick()"> Charts</button>
-    </div>
-
-    <div class="chart-content" *ngIf = "isChartBtnClicked">
-        <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
-            <mat-tab label="New Files">
-                <div class="newFiles">
-                        <section class="example-section">
-                            <div *ngFor = "let item of newFiles; let i = index">
-                                <div class="d-flex checkboxDiv">
-                                    <input type="checkbox" class="example-margin" (change)="onChange('newFiles')" [(ngModel)]="item.isSelected">
-                                    <label>{{ item.name }}</label>
-                                </div> 
+<app-client-navbar></app-client-navbar>
+<main>
+    <div class="map-view">
+        <div class="map" id="map" class="match-parent"></div>
+    
+        <div class="mapTypeId">
+            <button class="btn text-center" (click)="onChartClick()"> Charts</button>
+        </div>
+    
+        <div class="chart-content" *ngIf = "isChartBtnClicked">
+            <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+                <mat-tab label="New Files">
+                    <div class="newFiles">
+                            <section class="example-section">
+                                <div *ngFor = "let item of newFiles; let i = index">
+                                    <div class="d-flex checkboxDiv">
+                                        <input type="checkbox" class="example-margin" (change)="onChange('newFiles')" [(ngModel)]="item.isSelected">
+                                        <label>{{ item.name }}</label>
+                                    </div> 
+                                </div>
+                            </section>  
+                            <div class="requestBtnDiv" *ngIf="showRequest">
+                                <button class="btn btn-primary" (click)="getRequestedNewFiles()">Request</button>
                             </div>
-                        </section>  
-                        <div class="requestBtnDiv" *ngIf="showRequest">
-                            <button class="btn btn-primary" (click)="getRequestedNewFiles()">Request</button>
-                        </div>
-                    <div *ngIf="newFiles.length <= 0" class="text-center"> No items Found </div>
-                </div>
-            </mat-tab>
-            <mat-tab label="Permitted Files">
-                <div class="permittedFiles ">
-                        <section class="example-section">
-                            <div *ngFor = "let item of permittedFiles; let i = index">
-                                <div class="d-flex checkboxDiv">
-                                    <input type="checkbox" class="example-margin" (change)="onPermitChange('permittedFiles')" [(ngModel)]="item.isSelected">
-                                    <label>{{ item.name }}</label>
-                                </div> 
+                        <div *ngIf="newFiles.length <= 0" class="text-center"> No items Found </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Permitted Files">
+                    <div class="permittedFiles ">
+                            <section class="example-section">
+                                <div *ngFor = "let item of permittedFiles; let i = index">
+                                    <div class="d-flex checkboxDiv">
+                                        <input type="checkbox" class="example-margin" (change)="onPermitChange('permittedFiles')" [(ngModel)]="item.isSelected">
+                                        <label>{{ item.name }}</label>
+                                    </div> 
+                                </div>
+                            </section>  
+                            <div class="requestBtnDiv" *ngIf="showRequest2">
+                                <button class="btn btn-primary">Request</button>
                             </div>
-                        </section>  
-                        <div class="requestBtnDiv" *ngIf="showRequest2">
-                            <button class="btn btn-primary">Request</button>
-                        </div>
-                    <div *ngIf="permittedFiles.length <= 0" class="text-center"> No items Found </div>
-                </div> 
-            </mat-tab>
-        </mat-tab-group>
+                        <div *ngIf="permittedFiles.length <= 0" class="text-center"> No items Found </div>
+                    </div> 
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+          
     </div>
-      
-</div>
-
-
+</main>

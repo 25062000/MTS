@@ -31,4 +31,12 @@ export class AuthService {
     }
     return false;
   }
+
+  getClientId(){
+    var token = this.getAccessToken();
+    if(token){ 
+      var payload = JSON.parse(window.atob(token.split('.')[1]));
+      return payload.clientID;
+    }
+  }
 }
