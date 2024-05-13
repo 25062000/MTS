@@ -26,6 +26,25 @@
                     </div>
                 </mat-tab>
                 <mat-tab label="Permitted Files">
+                    <div class="Source files">
+                        <div class="sample-wrapper">
+                            <div class="combo-section">
+                                <igx-combo [data]="mapSources" displayKey="name" valueKey="id" placeholder="Sources"></igx-combo>
+
+                                <button (click)="onSelectSource()">Select source</button>
+                            </div>
+                            <!-- <h6>Selected Cities:</h6>
+                            <div class="cities-container">
+                                <igx-card  *ngFor="let city of selectedNoValueKey">
+                                    <igx-card-header>
+                                        <h5 igxCardHeaderTitle>{{ city.name }}</h5>
+                                        <h5 igxCardHeaderSubtitle>{{ city.country }}</h5>
+                                        {{ city.id }}
+                                    </igx-card-header>
+                                </igx-card>
+                            </div> -->
+                        </div>                        
+                    </div>
                     <div class="permittedFiles ">
                             <section class="example-section">
                                 <div *ngFor = "let item of permittedFiles; let i = index">
@@ -36,7 +55,7 @@
                                 </div>
                             </section>  
                             <div class="requestBtnDiv" *ngIf="showRequest2">
-                                <button class="btn btn-primary">Request</button>
+                                <button class="btn btn-primary">Remove</button>
                             </div>
                         <div *ngIf="permittedFiles.length <= 0" class="text-center"> No items Found </div>
                     </div> 

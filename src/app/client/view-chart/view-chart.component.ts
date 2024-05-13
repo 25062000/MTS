@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import {MatTabsModule} from '@angular/material/tabs'; 
 import {MatCheckboxModule} from '@angular/material/checkbox'; 
 import * as mapboxgl from 'mapbox-gl';
@@ -7,15 +7,20 @@ import { ClientService } from '../../service/client.service';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../service/auth.service';
 import { ClientNavbarComponent } from '../client-navbar/client-navbar.component';
+import { IGX_COMBO_DIRECTIVES, IgxComboComponent } from 'igniteui-angular';
 
 @Component({
   selector: 'app-view-chart',
   standalone: true,
-  imports: [ MatTabsModule, CommonModule, MatCheckboxModule, FormsModule, ClientNavbarComponent],
+  imports: [ MatTabsModule, CommonModule, MatCheckboxModule, 
+    FormsModule, ClientNavbarComponent, IGX_COMBO_DIRECTIVES],
   templateUrl: './view-chart.component.html',
   styleUrl: './view-chart.component.css'
 })
 export class ViewChartComponent {
+
+  @ViewChild('withValueKey', {read: IgxComboComponent, static: true})
+  public comboValue!: IgxComboComponent;
 
   constructor(private _clientService: ClientService, private _authService: AuthService){}
 
@@ -32,9 +37,17 @@ export class ViewChartComponent {
   clientID: any; 
   permittedFiles: any[] = [];
 
+  // Combo box
+  public mapSources: { name: string, id: string }[] = [];
+
   ngOnInit() { 
       this.loadNewFiles();
       this.loadPermittedFiles();
+      this.mapSources = [{ name: 'BLACKBACK', id: 'SeaChart_DAY_BLACKBACK' },
+       { name: 'BRIGHT', id: 'SeaChart_DAY_BRIGHT'},
+       { name: 'WHITEBACK', id: 'SeaChart_DAY_WHITEBACK'},
+       { name: 'DUSK', id:'SeaChart_DUSK'},
+       { name: 'NIGHT', id:'SeaChart_NIGHT'}];
       this.map = new mapboxgl.Map({
         container: 'map',
         accessToken: this.accessToken,
@@ -151,6 +164,15 @@ export class ViewChartComponent {
       var payload = JSON.parse(window.atob(token.split('.')[1]));
       return payload.clientID;
     }
+  }
+
+
+  onSelectSource(){
+    console.log("clicked");
+    alert("Select source function called");
+    // if(this.comboValue){
+      console.log(this.comboValue.value);
+    // }
   }
   
 }
