@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { accessToken } from 'mapbox-gl';
 
 @Component({
   selector: 'app-admin-navbar',
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './admin-navbar.component.html',
   styleUrl: './admin-navbar.component.css'
 })

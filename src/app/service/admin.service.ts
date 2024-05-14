@@ -36,4 +36,7 @@ export class AdminService {
     return this._http.post(this.baseUrl +'rejectRequestFiles', requestedArray);
   }
 
+  getUploadedFiles():Observable<any>{
+    return this._http.get(this.baseUrl+'getAllUploadedFiles')
+  }
 }

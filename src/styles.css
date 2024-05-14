@@ -2,3 +2,21 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+ngx-file-drop .ngx-file-drop__content {
+    display: flex;
+    flex-direction: column!important;
+    align-items: center;
+    justify-content: center;
+    height: unset;
+    color: #0782d0; 
+    gap: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: unset!important;
+  
+  }
+
+  .ngx-file-drop__drop-zone{
+    height: unset!important;
+    width: 50%;
+  }
