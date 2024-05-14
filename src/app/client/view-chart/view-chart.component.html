@@ -27,25 +27,17 @@
                 </mat-tab>
                 <mat-tab label="Permitted Files">
                     <div class="Source files">
+                        <h5 class="ms-3">Sources</h5>
                         <div class="sample-wrapper">
                             <div class="combo-section">
-                                <igx-combo [data]="mapSources" displayKey="name" valueKey="id" placeholder="Sources"></igx-combo>
+                                <igx-combo #combo [data]="mapSources" displayKey="name" valueKey="id" placeholder="Sources"></igx-combo>
 
-                                <button (click)="onSelectSource()">Select source</button>
+                                <button igxButton (click)="onSelectSource()">Select source</button>
                             </div>
-                            <!-- <h6>Selected Cities:</h6>
-                            <div class="cities-container">
-                                <igx-card  *ngFor="let city of selectedNoValueKey">
-                                    <igx-card-header>
-                                        <h5 igxCardHeaderTitle>{{ city.name }}</h5>
-                                        <h5 igxCardHeaderSubtitle>{{ city.country }}</h5>
-                                        {{ city.id }}
-                                    </igx-card-header>
-                                </igx-card>
-                            </div> -->
                         </div>                        
                     </div>
                     <div class="permittedFiles ">
+                        <h5 class="ms-3">Permitted Files</h5>
                             <section class="example-section">
                                 <div *ngFor = "let item of permittedFiles; let i = index">
                                     <div class="d-flex checkboxDiv">
@@ -55,7 +47,7 @@
                                 </div>
                             </section>  
                             <div class="requestBtnDiv" *ngIf="showRequest2">
-                                <button class="btn btn-primary">Remove</button>
+                                <button class="btn btn-primary" (click)="removeENC();">Remove</button>
                             </div>
                         <div *ngIf="permittedFiles.length <= 0" class="text-center"> No items Found </div>
                     </div> 

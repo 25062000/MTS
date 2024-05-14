@@ -34,4 +34,12 @@ export class ClientService {
   getPermittedFiles(clientID: any){
     return this._http.post(this.baseUrl+'getPermittedFiles', clientID);
   }
+
+  getMapSource(sources: any):Observable<any>{
+    return this._http.post(this.baseUrl+'getMapSources', sources);
+  }
+
+  removeENCFiles(removeFiles: any):Observable<any>{
+    return this._http.post(this.baseUrl+'removePermittedFiles', removeFiles);
+  }
 }

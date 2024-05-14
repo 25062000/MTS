@@ -62,6 +62,13 @@
   flex-direction:column;
 }
 
+.extendHeight2{
+  height: calc(90vh - 250px) !important;
+  display:flex;
+  flex-direction:column;
+}
+
+
 .requestBtnDiv{
   margin-left: 0;
   margin-top: auto;

@@ -14,6 +14,7 @@ export class ClientNavbarComponent {
   constructor(private _authService: AuthService, private _clientService:ClientService, private router: Router){}
 
   clientDetail:any;
+
   ngOnInit(){
     var clientID = this._authService.getClientId();
     clientID ={
@@ -21,7 +22,6 @@ export class ClientNavbarComponent {
     }
     this._clientService.getClientDetails(clientID).subscribe((result)=>{
       this.clientDetail = result.data;
-      console.log("cliemtDetail",this.clientDetail);
     })
   }
 

@@ -2,7 +2,7 @@
     <div class="header">
             <div class="logo" [routerLink]="['/']" >ENC Server</div>
             <div class="user">
-              <div class="user-name">{{clientDetail.name}}</div>
+              <div class="user-name">{{this.clientDetail.name}}</div>
               <div class="user-image"><i class="fa-solid fa-user"></i></div>
             </div>
     </div>
@@ -21,7 +21,7 @@
                 <div class="d-flex justify-content-center">
                     <button (click)="onSignOut()" class="btn signout">Sign Out</button>
                 </div>
-              </div>
+            </div>
         </div>
     </div>
    

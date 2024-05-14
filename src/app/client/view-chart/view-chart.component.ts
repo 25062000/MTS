@@ -17,10 +17,11 @@ import { IGX_COMBO_DIRECTIVES, IgxComboComponent } from 'igniteui-angular';
   templateUrl: './view-chart.component.html',
   styleUrl: './view-chart.component.css'
 })
-export class ViewChartComponent {
+export class ViewChartComponent{
 
-  @ViewChild('withValueKey', {read: IgxComboComponent, static: true})
-  public comboValue!: IgxComboComponent;
+  @ViewChild('combo', { read: IgxComboComponent, static: false })
+  public comboValue!: IgxComboComponent | undefined;
+
 
   constructor(private _clientService: ClientService, private _authService: AuthService){}
 
@@ -48,6 +49,7 @@ export class ViewChartComponent {
        { name: 'WHITEBACK', id: 'SeaChart_DAY_WHITEBACK'},
        { name: 'DUSK', id:'SeaChart_DUSK'},
        { name: 'NIGHT', id:'SeaChart_NIGHT'}];
+
       this.map = new mapboxgl.Map({
         container: 'map',
         accessToken: this.accessToken,
@@ -125,10 +127,10 @@ export class ViewChartComponent {
     const fileDiv = document.querySelector('.'+ whichFile);
     if(anyChecked){
       this.showRequest2 = true;
-      fileDiv?.classList.add('extendHeight'); 
+      fileDiv?.classList.add('extendHeight2'); 
     }else{
       this.showRequest2 = false;
-      fileDiv?.classList.remove('extendHeight'); 
+      fileDiv?.classList.remove('extendHeight2'); 
     }
   }
 
@@ -150,7 +152,7 @@ export class ViewChartComponent {
 
     this._clientService.requestNewFiles(requestedArray).subscribe((resultData: any) =>{
       if(resultData.status){
-        alert("Files are requested");
+        alert(resultData.message);
       }else{
         alert(resultData.message);
       }
@@ -167,12 +169,43 @@ export class ViewChartComponent {
   }
 
 
-  onSelectSource(){
-    console.log("clicked");
-    alert("Select source function called");
-    // if(this.comboValue){
-      console.log(this.comboValue.value);
-    // }
+  onSelectSource() {
+    if (this.comboValue) {
+      var sources = this.comboValue.selection;
+      console.log(sources); 
+      this._clientService.getMapSource(sources).subscribe((res: any)=>{
+        if(res.status){
+          var sourcePath = res.data;
+          console.log("SourcePath", sourcePath);
+        }else{
+          console.log(res.message);
+        }
+      })
+    } else {
+      console.error("Combo component not initialized.");
+    }
+  }
+
+  removeENC(){
+    var requestedFiles = this.permittedFiles.filter(item =>item.isSelected == true).map(item => item.name);
+    requestedFiles = requestedFiles.map((file, index)=>{
+      return {
+          id: index + 1,
+          name: file,
+          isSelected: false
+      };
+    })
+    var requestedArray = {
+      requestedFiles : requestedFiles
+    };
+    console.log("remove file", requestedArray);
+    this._clientService.removeENCFiles(requestedArray).subscribe((resultData: any) =>{
+      if(resultData.status){
+        alert("Files are removed");
+      }else{
+        alert(resultData.message);
+      }
+    });
   }
   
 }
