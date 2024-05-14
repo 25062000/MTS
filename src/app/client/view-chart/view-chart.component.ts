@@ -188,13 +188,13 @@ export class ViewChartComponent{
 
   removeENC(){
     var requestedFiles = this.permittedFiles.filter(item =>item.isSelected == true).map(item => item.name);
-    requestedFiles = requestedFiles.map((file, index)=>{
-      return {
-          id: index + 1,
-          name: file,
-          isSelected: false
-      };
-    })
+    // var requestedFile = requestedFiles.map((file, index)=>{
+    //   return {
+    //       id: index + 1,
+    //       name: file,
+    //       isSelected: false
+    //   };
+    // })
     var requestedArray = {
       requestedFiles : requestedFiles
     };
