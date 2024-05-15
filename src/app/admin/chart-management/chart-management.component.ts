@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { AdminService } from '../../service/admin.service';
 import { ClientService } from '../../service/client.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-chart-management',
   standalone: true,
@@ -14,7 +15,7 @@ import { ClientService } from '../../service/client.service';
 })
 export class ChartManagementComponent {
 
-  constructor( private _adminService: AdminService){}
+  constructor( private _adminService: AdminService, private toastr: ToastrService){}
 
   ngOnInit(){
     this.getENCFiles();
@@ -48,10 +49,10 @@ export class ChartManagementComponent {
     console.log(this.formData);
     this._adminService.uploadFiles(this.formData).subscribe((res:any) =>{
       if(res.status){
-        alert("Files uploaded successfully");
+        this.toastr.success("Files are uploaded");
         window.location.reload();
       }else{
-        console.log("Can't upload files");
+        this.toastr.error("Try again!! Can't upload files");
       }
     });
   }

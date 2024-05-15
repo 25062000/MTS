@@ -24,7 +24,6 @@ export class UsersListComponent{
     this._adminService.getAllUserDetails().subscribe(res=>{
       this.userDetails = res.data;
       console.log(this.userDetails);
-      console.log("Users details fetched successfully");
     })
   }
   

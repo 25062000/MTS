@@ -21,13 +21,15 @@ export class ClientNavbarComponent {
       clientID : clientID
     }
     this._clientService.getClientDetails(clientID).subscribe((result)=>{
-      this.clientDetail = result.data;
+      this.clientDetail = result.data.name;
     })
   }
 
   onSignOut(){
-    localStorage.setItem("accessToken", "");
-    this.router.navigateByUrl("/");
+    if(confirm("Are you want to logout?")){
+      localStorage.setItem("accessToken", "");
+      this.router.navigateByUrl("/");
+    }
   }
 
 }

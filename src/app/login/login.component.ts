@@ -5,6 +5,7 @@ import { ClientService } from '../service/client.service';
 import { Router } from '@angular/router';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { AdminService } from '../service/admin.service';
+import { ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,7 @@ export class LoginComponent {
     private _clientService: ClientService, 
     private router: Router,
     private _adminService: AdminService,
+    private toastr: ToastrService
   ){}
 
   submitted = false;
@@ -54,7 +56,6 @@ export class LoginComponent {
     if (this.router.url.includes('/admin/login')) 
     {  
            this.route = "admin"; 
-          //  alert(this.route);
     }
 
     let clientDetails ={
@@ -66,18 +67,20 @@ export class LoginComponent {
       this._clientService.clientLogin(clientDetails).subscribe((resultData: any)=>{
         if(resultData.status){
           localStorage.setItem("accessToken", resultData.data.token);
+          this.toastr.success('Logged In succesfully');
           this.router.navigateByUrl('/client/dashboard');
         }else{
-          alert(resultData.message)
+          this.toastr.error('Invalid Credentials');
         }      
       })
     }else{
       this._adminService.adminLogin(clientDetails).subscribe((resultData: any)=>{
         if(resultData.status){
           localStorage.setItem("accessToken", resultData.data.accesToken);
+          this.toastr.success('Logged In succesfully');
           this.router.navigateByUrl('/admin/dashboard');
         }else{
-          alert(resultData.message)
+          this.toastr.error(resultData.message);
         }
         
       })

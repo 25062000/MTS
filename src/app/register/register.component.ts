@@ -5,6 +5,7 @@ import { ClientService } from '../service/client.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { Route, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -21,7 +22,8 @@ import { Route, Router } from '@angular/router';
 })
 export class RegisterComponent {
 
-  constructor( private formBuilder: FormBuilder, private _clientService: ClientService, private router: Router){}
+  constructor( private formBuilder: FormBuilder, private _clientService: ClientService, 
+    private router: Router, private toastr: ToastrService){}
 
 
   registerForm!: FormGroup;
@@ -65,8 +67,19 @@ export class RegisterComponent {
     }
 
     this._clientService.clientRegister(clientDetails).subscribe((resultData: any)=>{
-      this.router.navigateByUrl('/login');
+      if(resultData.status){
+        this._clientService.clientLogin(clientDetails).subscribe((resultData: any)=>{
+          if(resultData.status){
+            localStorage.setItem("accessToken", resultData.data.token);
+            this.toastr.success('Logged In succesfully');
+            this.router.navigateByUrl('/client/dashboard');
+          }else{
+            this.toastr.error('Invalid Credentials');
+          }      
+        })
+      }else{
+        this.toastr.error('Error Occured while registration');
+      }
     })
-
   }
 }

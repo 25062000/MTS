@@ -14,7 +14,9 @@ export class AdminNavbarComponent {
   constructor(private router:Router){}
 
   onLogOut(){
+   if(confirm('Are you sure to logout>')){
     localStorage.setItem("accessToken","");
     this.router.navigateByUrl('/admin/login');
+   }
   }
 }

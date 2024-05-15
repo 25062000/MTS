@@ -7,7 +7,7 @@
                <h2 class="text-center"> CHART REQUESTS</h2>
             </div>
         </div>
-        <div id="userTable">
+        <div id="userTable" *ngIf="requestFileDetails.length >0">
             <table class="table">
                 <thead>
                   <tr>
@@ -40,6 +40,10 @@
                  
                 </tbody>
               </table>
+        </div>
+
+        <div>
+          <h5 class="text-center" *ngIf="requestFileDetails.length <=0">No chart requests found</h5>
         </div>
     </div>
 </main>

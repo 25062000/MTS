@@ -8,7 +8,7 @@
             </div>
         </div>
         <div id="userTable">
-            <table class="table">
+            <table class="table" *ngIf="userDetails.length>0">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
@@ -22,12 +22,20 @@
                     <th scope="row">{{i+1}}</th>
                     <td>{{user.name}}</td>
                     <td>{{user.email}}</td>
-                     <td><ul *ngFor="let item of user.requests; let i=index">
-                          <li>{{item.name}}</li>
-                        </ul></td>
+                     <td>
+                      <div *ngIf="user.requests.length >0">
+                        <ul *ngFor="let item of user.requests; let i=index">
+                          <li>{{item}}</li>
+                        </ul>
+                      </div>
+                      <div *ngIf="user.requests.length <=0"> No permitted files</div>
+                     </td>
                   </tr>
                 </tbody>
               </table>
+        </div>
+        <div  *ngIf="userDetails.length<=0">
+          <h5>No user Found</h5>
         </div>
     </div>
 </main>

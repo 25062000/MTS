@@ -30,7 +30,7 @@
                         <h5 class="ms-3">Chart Styles</h5>
                         <div class="sample-wrapper">
                             <div class="combo-section">
-                                <igx-combo #combo [data]="mapSources" displayKey="name" valueKey="id" placeholder="Sources"></igx-combo>
+                                <igx-combo #combo [data]="mapSources" displayKey="name" valueKey="id" placeholder="Sources" [(ngModel)]="selectedStyles"></igx-combo>
 
                                 <button igxButton (click)="onSelectSource()">Select source</button>
                             </div>

@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../service/auth.service';
 import { ClientNavbarComponent } from '../client-navbar/client-navbar.component';
 import { IGX_COMBO_DIRECTIVES, IgxComboComponent } from 'igniteui-angular';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-view-chart',
@@ -23,7 +24,7 @@ export class ViewChartComponent{
   public comboValue!: IgxComboComponent | undefined;
 
 
-  constructor(private _clientService: ClientService, private _authService: AuthService){}
+  constructor(private _clientService: ClientService, private _authService: AuthService, private toastr: ToastrService){}
 
   map: mapboxgl.Map | undefined;
   style = 'mapbox://styles/mapbox/streets-v11';
@@ -40,6 +41,7 @@ export class ViewChartComponent{
 
   // Combo box
   public mapSources: { name: string, id: string }[] = [];
+  public selectedStyles: string[] = ['SeaChart_DAY_BLACKBACK'];
 
   ngOnInit() { 
       this.loadNewFiles();
@@ -49,6 +51,8 @@ export class ViewChartComponent{
        { name: 'WHITEBACK', id: 'SeaChart_DAY_WHITEBACK'},
        { name: 'DUSK', id:'SeaChart_DUSK'},
        { name: 'NIGHT', id:'SeaChart_NIGHT'}];
+     
+      this.defaultStyle();
 
       this.map = new mapboxgl.Map({
         container: 'map',
@@ -152,9 +156,9 @@ export class ViewChartComponent{
 
     this._clientService.requestNewFiles(requestedArray).subscribe((resultData: any) =>{
       if(resultData.status){
-        alert(resultData.message);
+        this.toastr.success(resultData.message);
       }else{
-        alert(resultData.message);
+        this.toastr.error(resultData.message);
       }
     });
   }
@@ -188,24 +192,30 @@ export class ViewChartComponent{
 
   removeENC(){
     var requestedFiles = this.permittedFiles.filter(item =>item.isSelected == true).map(item => item.name);
-    // var requestedFile = requestedFiles.map((file, index)=>{
-    //   return {
-    //       id: index + 1,
-    //       name: file,
-    //       isSelected: false
-    //   };
-    // })
     var requestedArray = {
       requestedFiles : requestedFiles
     };
     console.log("remove file", requestedArray);
     this._clientService.removeENCFiles(requestedArray).subscribe((resultData: any) =>{
       if(resultData.status){
-        alert("Files are removed");
+        this.toastr.success('Files are removed');
       }else{
-        alert(resultData.message);
+        this.toastr.error('Try again');
+        console.log(resultData.message);
       }
     });
+  }
+
+  defaultStyle() {
+      var sources=[{ name: 'BLACKBACK', id: 'SeaChart_DAY_BLACKBACK' }] 
+      this._clientService.getMapSource(sources).subscribe((res: any)=>{
+        if(res.status){
+          var sourcePath = res.data;
+          console.log("SourcePath", sourcePath);
+        }else{
+          console.log(res.message);
+        }
+      })
   }
   
 }
