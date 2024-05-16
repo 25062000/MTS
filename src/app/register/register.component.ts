@@ -68,15 +68,7 @@ export class RegisterComponent {
 
     this._clientService.clientRegister(clientDetails).subscribe((resultData: any)=>{
       if(resultData.status){
-        this._clientService.clientLogin(clientDetails).subscribe((resultData: any)=>{
-          if(resultData.status){
-            localStorage.setItem("accessToken", resultData.data.token);
-            this.toastr.success('Logged In succesfully');
-            this.router.navigateByUrl('/client/dashboard');
-          }else{
-            this.toastr.error('Invalid Credentials');
-          }      
-        })
+        this.router.navigateByUrl('/client/dashboard');
       }else{
         this.toastr.error('Error Occured while registration');
       }

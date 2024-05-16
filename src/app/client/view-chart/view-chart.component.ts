@@ -179,8 +179,10 @@ export class ViewChartComponent{
       console.log(sources); 
       this._clientService.getMapSource(sources).subscribe((res: any)=>{
         if(res.status){
-          var sourcePath = res.data;
-          console.log("SourcePath", sourcePath);
+          var sourceKey = res.sourcekey;
+          var layerKey = res.layerkey;
+          console.log("SourcePath", sourceKey);
+          console.log("SourceLayer", layerKey);
         }else{
           console.log(res.message);
         }
@@ -210,8 +212,11 @@ export class ViewChartComponent{
       var sources=[{ name: 'BLACKBACK', id: 'SeaChart_DAY_BLACKBACK' }] 
       this._clientService.getMapSource(sources).subscribe((res: any)=>{
         if(res.status){
-          var sourcePath = res.data;
-          console.log("SourcePath", sourcePath);
+          var sourceKey = res.sourcekey;
+          var layerKey = res.layerkey;
+          console.log("SourcePath", sourceKey);
+          console.log("SourceLayer", layerKey);
+          console.log("path", res.data);
         }else{
           console.log(res.message);
         }
