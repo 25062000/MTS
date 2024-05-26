@@ -64,22 +64,6 @@ export class ViewChartComponent{
         center: [this.lng, this.lat]
       }); 
 
-      // console.log("To check2", this.sourceKey[1]);
-
-      // const srcKey = 'chart-source'; // Set the source key
-      // const sourceData = this.sourceKey[1]; // Extract the source data
-      // const sourceConfig = {
-          // 'type': sourceData.type,
-      //     'tiles': sourceData.tiles,
-      //     'tileSize': sourceData.tileSize
-      // };
-
-      // console.log("secndjf",srcKey,sourceConfig);
-      // this.map.on('load', () => {
-      //   this.map.addSource(sourceKey, sourceConfig);
-      //   this.map.addLayer(this.layerKey);
-      // });
-
   }
 
   onChartClick(){
@@ -195,13 +179,38 @@ export class ViewChartComponent{
     if (this.comboValue) {
       var sources = this.comboValue.selection;
       console.log(sources); 
-      this._clientService.getMapSource(sources).subscribe((res: any)=>{
-        if(res.status){
-          var sourceKey = res.sourcekey;
-          var layerKey = res.layerkey;
-          console.log("SourcePath", sourceKey);
-          console.log("SourceLayer", layerKey);
-        }else{
+      this._clientService.getMapSource(sources[0]).subscribe((res: any)=>{
+        this.sourceKey = res.sourcekey;
+          this.layerKey = res.layerkey;
+          const srcKey = this.sourceKey[0]; 
+          console.log("srckey",srcKey);// Set the source key
+          const sourceData = this.sourceKey[1]; // Extract the source data
+          const sourceConfig = {
+              'type': sourceData.type,
+              'tiles': sourceData.tiles,
+              'tileSize': 256
+          };
+          console.log("Sourceconfig", sourceConfig);
+
+          const layerdata = this.layerKey[0];
+          const layerConfig = {
+            'id': layerdata.id,
+            'type': layerdata.type,
+            'source':layerdata.source,
+            'paint':layerdata.paint
+          }
+          const layerbuild = this.layerKey[1];
+          console.log("layerConfig", layerConfig);
+
+          if(this.map){
+            this.map.on('load', () => {
+              console.log("executed");
+              if(this.map){
+                this.map.addSource(srcKey, sourceConfig);
+                this.map.addLayer(layerConfig,layerbuild);
+              }
+            });
+          }else{
           console.log(res.message);
         }
       })
@@ -231,17 +240,15 @@ export class ViewChartComponent{
       this._clientService.getMapSource(sources).subscribe((res: any)=>{
           this.sourceKey = res.sourcekey;
           this.layerKey = res.layerkey;
-          console.log("SourcePath", this.sourceKey);
-          console.log("To check", this.sourceKey[1]);
-          console.log("SourceLayer", this.layerKey);
-          console.log("path", res.data);
-          const srcKey = 'chart-source'; // Set the source key
+          const srcKey = this.sourceKey[0]; 
+          console.log("srckey",srcKey);// Set the source key
           const sourceData = this.sourceKey[1]; // Extract the source data
           const sourceConfig = {
               'type': sourceData.type,
               'tiles': sourceData.tiles,
-              'tileSize': sourceData.tileSize
+              'tileSize': 256
           };
+          console.log("Sourceconfig", sourceConfig);
 
           const layerdata = this.layerKey[0];
           const layerConfig = {
@@ -251,9 +258,8 @@ export class ViewChartComponent{
             'paint':layerdata.paint
           }
           const layerbuild = this.layerKey[1];
+          console.log("layerConfig", layerConfig);
 
-          console.log("secndjf",srcKey,sourceConfig);
-          console.log("layerche", layerConfig,layerbuild);
           if(this.map){
             this.map.on('load', () => {
               if(this.map){
@@ -261,10 +267,9 @@ export class ViewChartComponent{
                 this.map.addLayer(layerConfig,layerbuild);
               }
             });
-          }   
-        }else{
+          }else{
           console.log(res.message);
-          return false;
+          // return false;
         }
       })
   }
