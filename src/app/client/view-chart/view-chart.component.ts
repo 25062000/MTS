@@ -177,40 +177,16 @@ export class ViewChartComponent{
 
   onSelectSource() {
     if (this.comboValue) {
-      var sources = this.comboValue.selection;
-      console.log(sources); 
-      this._clientService.getMapSource(sources[0]).subscribe((res: any)=>{
-        this.sourceKey = res.sourcekey;
-          this.layerKey = res.layerkey;
-          const srcKey = this.sourceKey[0]; 
-          console.log("srckey",srcKey);// Set the source key
-          const sourceData = this.sourceKey[1]; // Extract the source data
-          const sourceConfig = {
-              'type': sourceData.type,
-              'tiles': sourceData.tiles,
-              'tileSize': 256
-          };
-          console.log("Sourceconfig", sourceConfig);
-
-          const layerdata = this.layerKey[0];
-          const layerConfig = {
-            'id': layerdata.id,
-            'type': layerdata.type,
-            'source':layerdata.source,
-            'paint':layerdata.paint
-          }
-          const layerbuild = this.layerKey[1];
-          console.log("layerConfig", layerConfig);
-
-          if(this.map){
-            this.map.on('load', () => {
-              console.log("executed");
-              if(this.map){
-                this.map.addSource(srcKey, sourceConfig);
-                this.map.addLayer(layerConfig,layerbuild);
-              }
-            });
-          }else{
+      // var sources = this.comboValue.selection;
+      // console.log(sources); 
+      this._clientService.getMapSource(this.comboValue.selection[0]).subscribe((res: any)=>{
+        const sources = res.sources;
+        if(this.map) {
+          Object.keys(sources).forEach((sourceKey) => {
+            this.map?.removeSource(sourceKey);
+            this.map?.addSource(sourceKey, sources[sourceKey]);
+          });
+        }else{
           console.log(res.message);
         }
       })
@@ -238,40 +214,26 @@ export class ViewChartComponent{
   defaultStyle() {
       var sources={ name: 'BLACKBACK', id: 'SeaChart_DAY_BLACKBACK' }
       this._clientService.getMapSource(sources).subscribe((res: any)=>{
-          this.sourceKey = res.sourcekey;
-          this.layerKey = res.layerkey;
-          const srcKey = this.sourceKey[0]; 
-          console.log("srckey",srcKey);// Set the source key
-          const sourceData = this.sourceKey[1]; // Extract the source data
-          const sourceConfig = {
-              'type': sourceData.type,
-              'tiles': sourceData.tiles,
-              'tileSize': 256
-          };
-          console.log("Sourceconfig", sourceConfig);
 
-          const layerdata = this.layerKey[0];
-          const layerConfig = {
-            'id': layerdata.id,
-            'type': layerdata.type,
-            'source':layerdata.source,
-            'paint':layerdata.paint
-          }
-          const layerbuild = this.layerKey[1];
-          console.log("layerConfig", layerConfig);
+        const sources = res.sources;
+        const layers = res.layers;
 
-          if(this.map){
-            this.map.on('load', () => {
-              if(this.map){
-                this.map.addSource(srcKey, sourceConfig);
-                this.map.addLayer(layerConfig,layerbuild);
-              }
-            });
-          }else{
+        if(this.map) {
+          this.map.on('load', () => {
+            if(this.map) {
+              Object.keys(sources).forEach((sourceKey: string) => {
+                this.map?.removeSource(sourceKey);
+                this.map?.addSource(sourceKey, sources[sourceKey]);
+              });
+              layers.forEach((layer: any) => {
+                this.map?.addLayer(layer);
+              });
+            }
+          });
+        } else {
           console.log(res.message);
-          // return false;
         }
-      })
+      });
   }
   
 }
