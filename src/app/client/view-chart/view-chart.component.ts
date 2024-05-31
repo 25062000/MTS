@@ -54,15 +54,23 @@ export class ViewChartComponent{
        { name: 'DUSK', id:'SeaChart_DUSK'},
        { name: 'NIGHT', id:'SeaChart_NIGHT'}];
      
-      this.defaultStyle();
-
       this.map = new mapboxgl.Map({
         container: 'map',
         accessToken: this.accessToken,
         style: this.style,
         zoom: 13,
-        center: [this.lng, this.lat]
+        center: [this.lng, this.lat],
+        // transformRequest:(url, resourceType) =>{
+        //   return {
+        //     url: url,
+        //     headers: {
+        //         'Access-Control-Allow-Origin': '*'
+        //    }
+        //   };
+        // }
       }); 
+
+      this.defaultStyle();
 
   }
 
@@ -183,7 +191,10 @@ export class ViewChartComponent{
         const sources = res.sources;
         if(this.map) {
           Object.keys(sources).forEach((sourceKey) => {
-            this.map?.removeSource(sourceKey);
+            if (this.map?.getSource(sourceKey)){
+              this.map?.removeSource(sourceKey);
+            }
+           
             this.map?.addSource(sourceKey, sources[sourceKey]);
           });
         }else{
@@ -222,7 +233,9 @@ export class ViewChartComponent{
           this.map.on('load', () => {
             if(this.map) {
               Object.keys(sources).forEach((sourceKey: string) => {
+                if (this.map?.getSource(sourceKey)){
                 this.map?.removeSource(sourceKey);
+                }
                 this.map?.addSource(sourceKey, sources[sourceKey]);
               });
               layers.forEach((layer: any) => {
