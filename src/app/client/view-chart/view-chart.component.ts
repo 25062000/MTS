@@ -189,7 +189,13 @@ export class ViewChartComponent{
       // console.log(sources); 
       this._clientService.getMapSource(this.comboValue.selection[0]).subscribe((res: any)=>{
         const sources = res.sources;
+        const layers = res.layers;
         if(this.map) {
+          layers.forEach((layer: any) => {
+            if (this.map?.getLayer(layer.id)) {
+              this.map.removeLayer(layer.id);
+            }
+          })
           Object.keys(sources).forEach((sourceKey) => {
             if (this.map?.getSource(sourceKey)){
               this.map?.removeSource(sourceKey);
@@ -197,6 +203,7 @@ export class ViewChartComponent{
            
             this.map?.addSource(sourceKey, sources[sourceKey]);
           });
+          layers.forEach((layer: any) => {this.map?.addLayer(layer)})
         }else{
           console.log(res.message);
         }
@@ -232,9 +239,14 @@ export class ViewChartComponent{
         if(this.map) {
           this.map.on('load', () => {
             if(this.map) {
+              layers.forEach((layer: any) => {
+                if (this.map?.getLayer(layer.id)) {
+                  this.map.removeLayer(layer.id);
+                }
+              })
               Object.keys(sources).forEach((sourceKey: string) => {
                 if (this.map?.getSource(sourceKey)){
-                this.map?.removeSource(sourceKey);
+                  this.map?.removeSource(sourceKey);
                 }
                 this.map?.addSource(sourceKey, sources[sourceKey]);
               });
